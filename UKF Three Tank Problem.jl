@@ -96,7 +96,7 @@ function UKF(estimationlength, N_meas, xhat_0, P0, R, Q, y, params)         #the
             xsigma[:, (i+nx)] = xhatpos - root_pred.U[(i-1), :]
         end
 
-        # Transform the sigma poits in the prediction step
+        # Transform the sigma points in the prediction step
        
         xsigmaneg = zeros(nx, 2*nx+1)             
         
@@ -219,11 +219,10 @@ end
 normalparams = Params(6e-5, 6e-5, 1, 5e-5, 9.81, 0.0154, 0.8, 1.0, 0.6, 0.002)
 
 x0 = [0.6, 0.4, 0.45]
-tspan = (0.0, 500)
 
 #Generate true state conditions
 
-estimationlength = 20       #specify the length of the state estimation period by the number of state estimates obtained at the end of the simulation.
+estimationlength = 20      #specify the length of the state estimation period by the number of state estimates obtained at the end of the simulation.
 N_meas = 10                #specify the measurement sampling rate
 tstart = 0
 tend = tstart + estimationlength * N_meas
@@ -239,8 +238,8 @@ ODEsol2 = solve(prob, Tsit5())
 
 xhat_0 = [0.5, 0.5, 0.5]
 nx = length(xhat_0)
-P0 = 0.001*I(nx) #initial covariance matrix
-Q = 0.001*I(nx) #process noise covariance matrix
+P0 = 0.0001*I(nx) #initial covariance matrix
+Q = 0.0001*I(nx) #process noise covariance matrix
 vk_std = 0.02 #standard deviation of measurement noise
 R = [vk_std ^2] #measurment noise variance
 
